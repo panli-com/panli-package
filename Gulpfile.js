@@ -3,6 +3,7 @@
  */
 // 引入 gulp
 var gulp = require('gulp');
+var react = require('gulp-react');
 
 // 引入组件
 //var jshint = require('gulp-jshint');
@@ -11,8 +12,10 @@ var sass = require('gulp-sass'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
+    browserify = require('gulp-browserify'),
     browserSync = require('browser-sync').create(),
     notify = require('gulp-notify'),
+    jshint = require('gulp-jshint'),
     autoprefixer = require('gulp-autoprefixer'),
     livereload = require('gulp-livereload');
 
@@ -31,6 +34,17 @@ gulp.task('browser-sync', function() {
         }
     });
 });
+
+//react 编译
+
+gulp.task('react', function () {
+    return gulp.src('./src/jsx/register.jsx')
+        .pipe(browserify({
+            transform:'reactify',
+        }))
+        .pipe(gulp.dest('./dist/js'));
+});
+
 
 //编译Sass，Autoprefix及缩小化
 gulp.task('styles', function() {
@@ -53,6 +67,19 @@ gulp.task('sass', function() {
         .pipe(gulp.dest('./dist/css'));
 });
 
+gulp.task('scripts', function() {
+    return gulp.src('./src/js/*.js')
+        .pipe(jshint('.jshintrc'))
+        .pipe(jshint.reporter('default'))
+        .pipe(concat('main.js'))
+        .pipe(gulp.dest('dist/js'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/js'))
+        .pipe(notify({ message: 'Scripts task complete' }));
+});
+
+
 // 合并，压缩文件
 gulp.task('js', function() {
     gulp.src('./src/js/*.js')
@@ -66,12 +93,26 @@ gulp.task('js', function() {
 // 默认任务
 gulp.task('default', function(){
     //gulp.run( 'sass', 'js','browser-sync');
-    gulp.run( 'styles', 'js');
+    gulp.run( 'styles', 'scripts');
     var server = livereload();
-    // 监听文件变化
-    gulp.watch('./src/**/*.*', function(file){
+   /* // 监听文件变化
+    gulp.watch('./src/!**!/!*.*', function(file){
         //gulp.run( 'sass', 'js','browser-sync');
-        gulp.run( 'styles', 'js');
+        gulp.run( 'styles', 'scripts');
 
-    });
+    });*/
+});
+
+/* 监听 */
+
+gulp.task('watch', function() {
+
+    // 看守所有.scss档
+    gulp.watch('src/scss/*.scss', ['styles']);
+
+    // 看守所有.js档
+    gulp.watch('src/js/*.js', ['scripts']);
+
+
+
 });
