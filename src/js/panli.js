@@ -11,26 +11,31 @@
             return jsPath.substring(0, jsPath.lastIndexOf("/") + 1);
         }(),
 
-        //ÆÁ±ÎEnter´¥·¢µ¯²ã
+        //å±è”½Enterè§¦å‘å¼¹å±‚
         enter: function(e){
             if(e.keyCode === 13) e.preventDefault();
         },
         config: {}, end: {},
         btn: ['&#x786E;&#x5B9A;','&#x53D6;&#x6D88;'],
 
-        //ÎåÖÖÔ­Ê¼²ãÄ£Ê½
+        //äº”ç§åŸå§‹å±‚æ¨¡å¼
         type: ['dialog', 'page', 'iframe', 'loading', 'tips']
     };
+    var path = ''; //æ‰€åœ¨è·¯å¾„ï¼Œå¦‚æœéæ¨¡å—åŠ è½½ä¸ç”¨é…ç½®
+    path = path ? path : document.scripts[document.scripts.length-1].src.match(/[\s\S]*\//)[0];
 
-    //²åÈëcss
-    document.head.appendChild((function(){
-        var link = doc.createElement('link');
-        link.href = path + 'need/layer.css';
-        link.type = 'text/css';
-        link.rel = 'styleSheet'
-        link.id = 'layermcss';
-        return link;
-    }()));
+    //var doc = document, query = 'querySelectorAll', claname = 'getElementsByClassName', S = function(s){
+    //    return doc[query](s);
+    //};
+    //æ’å…¥css
+    //document.head.appendChild((function(){
+    //  /*  var link = doc.createElement('link');
+    //    //link.href = path + 'need/layer.css';
+    //    //link.type = 'text/css';
+    //    //link.rel = 'styleSheet'
+    //    //link.id = 'layermcss';
+    //    return link;*/
+    //}()));
 
 
 
