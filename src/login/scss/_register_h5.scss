@@ -1,6 +1,7 @@
 body {
   background-color:#efefef;
 }
+
 .main {
   min-width:320px;
   margin:auto;
@@ -23,7 +24,7 @@ body {
 }
 .back {
   position:absolute;
-  background:url(/FrontEnd/images20090801/H5/prev.png) no-repeat center;
+  //background:url(/FrontEnd/images20090801/H5/prev.png) no-repeat center;
   background-size:contain;
   width:1.005rem;
   height:1.005rem;
@@ -55,7 +56,7 @@ body {
 }
 .input span.login_icon {
   display:block;
-  background:url(/FrontEnd/images20090801/H5/login.png) no-repeat;
+/*  background:url(/FrontEnd/images20090801/H5/login.png) no-repeat;*/
   background-size:1.625rem 6.5rem;
   width:1.9rem;
   height:1.9rem;
@@ -78,7 +79,7 @@ body {
   margin-top:0.6rem;
   font-size:0.7rem;
   height:0.8rem;
-  background-color:none;
+  background-color:transparent;
   border:none;
 }
 .submit {

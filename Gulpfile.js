@@ -1,13 +1,14 @@
 /**
  * Created by Administrator on 2015/9/11.
  */
-// ÒıÈë gulp
+// å¼•å…¥ gulp
 var gulp = require('gulp');
 var react = require('gulp-react');
 
-// ÒıÈë×é¼ş
+// å¼•å…¥ç»„ä»¶
 //var jshint = require('gulp-jshint');
 var sass = require('gulp-sass'),
+    connect = require('gulp-connect'),
     minifycss = require('gulp-minify-css'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
@@ -17,9 +18,10 @@ var sass = require('gulp-sass'),
     notify = require('gulp-notify'),
     jshint = require('gulp-jshint'),
     autoprefixer = require('gulp-autoprefixer'),
-    livereload = require('gulp-livereload');
+    livereload = require('gulp-livereload'),
+    port = process.env.port || 5000;
 
-// ¼ì²é½Å±¾
+// æ£€æŸ¥è„šæœ¬
 //gulp.task('lint', function() {
 //    gulp.src('./js/*.js')
 //        .pipe(jshint())
@@ -35,82 +37,131 @@ gulp.task('browser-sync', function() {
     });
 });
 
-//react ±àÒë
+// live reload
+gulp.task('connect',function(){
+    connect.server({
+        // root:'./',
+        port: port,
+        livereload: true,
+    })
+})
+
+// reload Js
+gulp.task('js',function(){
+    gulp.src('./dist/**/*.js')
+        .pipe( connect.reload() )
+})
+
+
+gulp.task('html',function(){
+    gulp.src('./*.html')
+        .pipe( connect.reload() )
+});
+
+//react ç¼–è¯‘
 
 gulp.task('react', function () {
-    return gulp.src('./src/jsx/register.jsx')
+    return gulp.src('./src/login/js/main.js')
         .pipe(browserify({
-            transform:'reactify',
+            transform: 'reactify',
         }))
-        .pipe(gulp.dest('./dist/js'));
+        .pipe(gulp.dest('./dist/login/js'));
 });
 
-
-//±àÒëSass£¬Autoprefix¼°ËõĞ¡»¯
-gulp.task('styles', function() {
-    return gulp.src('./src/scss/*.scss')
+// reload Js
+gulp.task('js',function(){
+    gulp.src('./dist/**/js/*.js')
+        .pipe( connect.reload() )
+        .pipe(notify({ message: 'reload Js Ok' }));
+})
+//ç¼–è¯‘Sassï¼ŒAutoprefixåŠç¼©å°åŒ–
+gulp.task('common', function() {
+    return gulp.src('./src/common/scss/panli.scss')
         .pipe(sass({ style: 'expanded' }))
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-        .pipe(gulp.dest('dist/css'))
+        .pipe(gulp.dest('dist/common/css'))
         .pipe(rename({suffix: '.min'}))
         .pipe(minifycss())
-        .pipe(gulp.dest('dist/css'))
-        .pipe(notify({ message: 'Styles task complete' }));
+        .pipe(gulp.dest('dist/common/css'))
+        .pipe( connect.reload() )
+        .pipe(notify({ message: 'Styles Common task complete' }));
+        /* gulp.src('./src/login/scss/!*.scss')
+        .pipe(sass({ style: 'expanded' }))
+        .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+        .pipe(gulp.dest('dist/login/css'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(minifycss())
+        .pipe(gulp.dest('dist/login/css'))
+        .pipe(notify({ message: 'Styles task complete' }));*/
 });
 
-// ±àÒëSass
-gulp.task('sass', function() {
-    gulp.src('./src/scss/*.scss')
-        .pipe(sass())
+//ç¼–è¯‘Sassï¼ŒAutoprefixåŠç¼©å°åŒ–
+gulp.task('login', function() {
+    return gulp.src('./src/login/scss/login.scss')
+        .pipe(sass({ style: 'expanded' }))
+        .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+        .pipe(gulp.dest('dist/login/css'))
         .pipe(rename({suffix: '.min'}))
         .pipe(minifycss())
-        .pipe(gulp.dest('./dist/css'));
+        .pipe(gulp.dest('dist/login/css'))
+        .pipe( connect.reload() )
+        .pipe(notify({ message: 'Styles Login task complete' }));
+
 });
 
 gulp.task('scripts', function() {
-    return gulp.src('./src/js/*.js')
+    return gulp.src('./src/common/js/*.js')
         .pipe(concat('panli.js'))
-        .pipe(gulp.dest('dist/js'))
+        .pipe(gulp.dest('dist/common/js'))
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
-        .pipe(gulp.dest('dist/js'))
+        .pipe(gulp.dest('dist/common/js'))
+        .pipe( connect.reload() )
         .pipe(notify({ message: 'Scripts task complete' }));
 });
 
 
-// ºÏ²¢£¬Ñ¹ËõÎÄ¼ş
-gulp.task('js', function() {
-    gulp.src('./src/js/*.js')
+// åˆå¹¶ï¼Œå‹ç¼©æ–‡ä»¶
+/*gulp.task('js', function() {
+    gulp.src('./src/js/!*.js')
         .pipe(concat('panli.js'))
         .pipe(gulp.dest('./dist'))
         .pipe(rename('panli.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('./dist/js'));
-});
+});*/
 
-// Ä¬ÈÏÈÎÎñ
+// é»˜è®¤ä»»åŠ¡
 gulp.task('default', function(){
     //gulp.run( 'sass', 'js','browser-sync');
     gulp.run( 'styles', 'scripts');
     var server = livereload();
-   /* // ¼àÌıÎÄ¼ş±ä»¯
-    gulp.watch('./src/!**!/!*.*', function(file){
-        //gulp.run( 'sass', 'js','browser-sync');
-        gulp.run( 'styles', 'scripts');
+    /* // ç›‘å¬æ–‡ä»¶å˜åŒ–
+     gulp.watch('./src/!**!/!*.*', function(file){
+     //gulp.run( 'sass', 'js','browser-sync');
+     gulp.run( 'styles', 'scripts');
 
-    });*/
+     });*/
 });
 
-/* ¼àÌı */
+/* ç›‘å¬ */
 
 gulp.task('watch', function() {
 
-    // ¿´ÊØËùÓĞ.scssµµ
-    gulp.watch('src/scss/*.scss', ['styles']);
+    // çœ‹å®ˆæ‰€æœ‰.scssæ¡£
+    gulp.watch('src/common/scss/*.scss', ['common']);
+    gulp.watch('src/login/scss/*.scss', ['login']);
 
-    // ¿´ÊØËùÓĞ.jsµµ
-    gulp.watch('src/js/*.js', ['scripts']);
+    // çœ‹å®ˆæ‰€æœ‰.ç»„ä»¶
+    gulp.watch('src/common/js/*.js', ['scripts']);
 
-
+    // çœ‹å®ˆæ‰€æœ‰.jsæ¡£
+    gulp.watch('src/**/js/*.js', ['js']);
+    // çœ‹å®ˆæ‰€æœ‰. react
+    gulp.watch('./src/login/js/*.js', ['react']);
+    // çœ‹å®ˆæ‰€æœ‰.html
+    gulp.watch('./*.html',['html']);
 
 });
+
+gulp.task('serve',['react','connect','watch']);

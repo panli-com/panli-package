@@ -1,0 +1,238 @@
+/* panAlter 弹层移动版样式  panli.com  by zan */
+
+.panAltermbox {
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  z-index:19891014;
+}
+.panAltermshade,.panDoing_mask,.panAltermmain {
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  z-index: 100;
+}
+.panDoing_wrap{
+  position:fixed;
+  top: 50%;
+  right: 50%;
+  display: none;
+  z-index: 101;
+  .closePanDoing{
+    position: absolute;
+    top: 15px;
+    right: 150px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+  a{
+    position: absolute;
+    display: block;
+    height: 80px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+.panAltermshade ,.panDoing_mask{
+  background-color:rgba(0,0,0,.5);
+  pointer-events:auto;
+}
+.panAltermmain {
+  display:table;
+  font-family:Helvetica,arial,sans-serif;
+  pointer-events:none;
+}
+.panAltermmain .section {
+  display:table-cell;
+  vertical-align:middle;
+  text-align:center;
+}
+.panAltermchild {
+  position:relative;
+  display:inline-block;
+  text-align:left;
+  background-color:#fff;
+  font-size:14px;
+  border-radius:6px;
+  box-shadow:0 0 8px rgba(0,0,0,0.1);
+  pointer-events:auto;
+}
+.panAltermchild {
+  -webkit-animation-fill-mode:both;
+  animation-fill-mode:both;
+  -webkit-animation-duration:.18s;
+  animation-duration:.18s;
+}
+.panAltermborder {
+  border:1px solid #999;
+}
+@-webkit-keyframes bounceIn {
+  /* 默认   */
+  0% {
+    opacity:0;
+    -webkit-transform:scale(.5);
+    transform:scale(.5)
+  }
+  100% {
+    opacity:1;
+    -webkit-transform:scale(1);
+    transform:scale(1)
+  }
+}.panAltermanim {
+   animation-name:bounceIn;
+   -webkit-animation-name:bounceIn;
+ }
+.panAltermbox0 .panAltermchild {
+  max-width:260px;
+  min-width:150px;
+}
+.panAltermbox1 .panAltermchild {
+  border:none;
+  border-radius:0;
+}
+.panAltermbox2 .panAltermchild {
+  width:auto;
+  max-width:260px;
+  min-width:40px;
+  border:none;
+  background-color:rgba(0,0,0,.6);
+  color:#fff;
+}
+.panAltermchild h3 {
+  padding:0 45px 0 10px;
+  height:50px;
+  line-height:50px;
+  border-bottom:1px solid #EBEBEB;
+  font-size:16px;
+  font-weight:400;
+  border-radius:5px 5px 0 0;
+  border-bottom:1px solid #EBEBEB;
+}
+.panAltermchild h3,.panAltermbtn span {
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.panAltermcont {
+  padding:20px 15px;
+  line-height:22px;
+  border-radius:5px;
+}
+.panAltermbox1 .panAltermcont {
+  padding:0;
+}
+.panAltermbox2 .panAltermcont {
+  text-align:center;
+  padding:30px 30px 0;
+  line-height:0;
+}
+.panAltermbox2 .panAltermcont i {
+  width:1.5rem;
+  height:1.5rem;
+  margin-left:8px;
+  display:inline-block;
+  background-color:#fff;
+  border-radius:100%;
+}
+.panAltermbox2 .panAltermcont i {
+  -webkit-animation:bouncedelay 1.4s infinite ease-in-out;
+  animation:bouncedelay 1.4s infinite ease-in-out;
+  -webkit-animation-fill-mode:both;
+  animation-fill-mode:both;
+}
+@-webkit-keyframes bouncedelay {
+  0%,80%,100% {
+    -webkit-transform:scale(0)
+  }
+  40% {
+    -webkit-transform:scale(1)
+  }
+}@keyframes bouncedelay {
+   0%,80%,100% {
+     transform:scale(0);
+     -webkit-transform:scale(0)
+   }
+   40% {
+     transform:scale(1);
+     -webkit-transform:scale(1)
+   }
+ }.panAltermbox2 .panAltermcont i:first-child {
+    margin-left:0;
+    -webkit-animation-delay:-.32s;
+    animation-delay:-.32s;
+  }
+.panAltermbox2 .panAltermcont i.laymloadtwo {
+  -webkit-animation-delay:-.16s;
+  animation-delay:-.16s;
+}
+.panAltermbox2 .panAltermcont>div {
+  line-height:22px;
+  padding-top:7px;
+  margin-bottom:20px;
+  font-size:14px;
+}
+.panAltermbtn {
+  position:relative;
+  height:40px;
+  line-height:40px;
+  font-size:0;
+  text-align:center;
+  border-top:1px solid #EBEBEB;
+}
+.panAltermbtn span {
+  position:relative;
+  display:inline-block;
+  width:50%;
+  text-align:center;
+  font-size:14px;
+  cursor:pointer;
+  border-radius:0 5px 0 0;
+}
+.panAltermbtn span:first-child {
+  height:39px;
+  background-color:#fff;
+  border-radius:0 0 0 5px;
+}
+.panAltermbtn:before {
+  content:'\20';
+  position:absolute;
+  width:1px;
+  height:39px;
+  left:50%;
+  top:0;
+  background-color:#EBEBEB;
+}
+.panAltermend {
+  position:absolute;
+  right:7px;
+  top:10px;
+  width:30px;
+  height:30px;
+  border:0;
+  font-weight:400;
+  background:transparent;
+  cursor:pointer;
+  -webkit-appearance:none;
+  font-size:30px;
+}
+.panAltermend::before,.panAltermend::after {
+  position:absolute;
+  left:5px;
+  top:13px;
+  content:'';
+  width:20px;
+  height:2px;
+  background-color:rgba(0,0,0,.3);
+  transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
+  border-radius:3px;
+}
+.panAltermend::after {
+  transform:rotate(-45deg);
+  -webkit-transform:rotate(-45deg);
+}

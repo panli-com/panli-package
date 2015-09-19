@@ -1,36 +1,49 @@
 
 ;!function(window){
     "use strict";
-
-    var path = ''; //所在路径，如果非模块加载不用配置
-    path = path ? path : document.scripts[document.scripts.length-1].src.match(/[\s\S]*\//)[0];
-
+    var _HostUrlUed = 'http://sf.panli.com/Ued';
     var doc = document, query = 'querySelectorAll',
         claname = 'getElementsByClassName',
         S = function(s){
             return doc[query](s);
         };
 
-     /* 插入css */
-    document.head.appendChild((function(){
+    var path = ''; //所在路径，如果非模块加载不用配置
+    path = path ? path : doc.scripts[doc.scripts.length-1].src.match(/[\s\S]*\//)[0];
+
+    var head = doc.head;
+
+    var metaHtml = '' +
+        '<meta content="yes" name="apple-mobile-web-app-capable" /> '+
+        '<meta content="black" name="apple-mobile-web-app-status-bar-style" /> '+
+        '<meta content="telephone=no" name="format-detection" /> '+
+        '<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0" />' ;
+
+    head.innerHTML += metaHtml;
+
+
+     /* 插入 公共组件  css */
+    doc.head.appendChild((function(){
         var link = doc.createElement('link');
-        link.href = path + 'css/alter.css';
+        link.href = _HostUrlUed+'/dist/common/css/panli.min.css';
         link.type = 'text/css';
         link.rel = 'styleSheet'
-        link.id = 'layermcss';
+        link.id = 'panlimcss';
+
+        console.log(link);
         return link;
     }()));
 
     /* 默认配置 */
     var config = {
-        type : 0,
+        type : 2,
         shade :true,
         shadeCloss:true,
         fixed:true,
         anim:true
     };
 
-    window.read = {
+    window.ready = {
         extend:function(obj){
             var newObj = JSON.parse(JSON.stringify(config));
             for(var i in obj){
@@ -43,7 +56,7 @@
     };
 
     /* 点击事件 */
-    read.touch =function(elem,func){
+    ready.touch =function(elem,func){
         var move;
         elem.addEventListener('touchmove',function(){
             move= true;
@@ -56,10 +69,10 @@
     };
 
     var index = 0,
-        classs = ['layermbox'],
+        classs = ['panAltermbox'],
         Pan = function(options){
             var that = this;
-            that.config = read.extend(options);
+            that.config = ready.extend(options);
             that.view();
         };
 
@@ -75,7 +88,7 @@
         var title = (function(){
             var titype = typeof config.title === 'object';
             return config.title
-                ? '<h3 style="'+ (titype ? config.title[1] : '') +'">'+ (titype ? config.title[0] : config.title)  +'</h3><button class="layermend"></button>'
+                ? '<h3 style="'+ (titype ? config.title[1] : '') +'">'+ (titype ? config.title[0] : config.title)  +'</h3><button class="panAltermend"></button>'
                 : '';
         }());
 
@@ -88,7 +101,7 @@
             if(btns === 2){
                 btndom = '<span type="0">'+ config.btn[1] +'</span>' + btndom;
             }
-            return '<div class="layermbtn">'+ btndom + '</div>';
+            return '<div class="panAltermbtn">'+ btndom + '</div>';
         }());
 
         if(!config.fixed){
@@ -101,12 +114,12 @@
             config.content = '<i></i><i class="laymloadtwo"></i><i></i><div>' + (config.content||'') + '</div>';
         }
 
-        panBox.innerHTML = (config.shade ? '<div '+ (typeof config.shade === 'string' ? 'style="'+ config.shade +'"' : '') +' class="laymshade"></div>' : '')
-            +'<div class="layermmain" '+ (!config.fixed ? 'style="position:static;"' : '') +'>'
+        panBox.innerHTML = (config.shade ? '<div '+ (typeof config.shade === 'string' ? 'style="'+ config.shade +'"' : '') +' class="panAltermshade"></div>' : '')
+            +'<div class="panAltermmain" '+ (!config.fixed ? 'style="position:static;"' : '') +'>'
             +'<div class="section">'
-            +'<div class="layermchild '+ (config.className ? config.className : '') +' '+ ((!config.type && !config.shade) ? 'layermborder ' : '') + (config.anim ? 'layermanim' : '') +'" ' + ( config.style ? 'style="'+config.style+'"' : '' ) +'>'
+            +'<div class="panAltermchild '+ (config.className ? config.className : '') +' '+ ((!config.type && !config.shade) ? 'panAltermborder ' : '') + (config.anim ? 'panAltermanim' : '') +'" ' + ( config.style ? 'style="'+config.style+'"' : '' ) +'>'
             + title
-            +'<div class="layermcont">'+ config.content +'</div>'
+            +'<div class="panAltermcont">'+ config.content +'</div>'
             + button
             +'</div>'
             +'</div>'
@@ -139,7 +152,7 @@
 
         //关闭按钮
         if(config.title){
-            var end = elem[claname]('layermend')[0], endfn = function(){
+            var end = elem[claname]('panAltermend')[0], endfn = function(){
                 config.cancel && config.cancel();
                 pan.close(that.index);
             };
@@ -160,7 +173,7 @@
 
 
         if(config.btn){
-            var btns = elem[claname]('layermbtn')[0].children, btnlen = btns.length;
+            var btns = elem[claname]('panAltermbtn')[0].children, btnlen = btns.length;
             for(var ii = 0; ii < btnlen; ii++){
                 ready.touch(btns[ii], btn);
                 btns[ii].onclick = btn;
@@ -169,7 +182,7 @@
 
         //点遮罩关闭
         if(config.shade && config.shadeClose){
-            var shade = elem[claname]('laymshade')[0];
+            var shade = elem[claname]('panAltermshade')[0];
             ready.touch(shade, function(){
                 pan.close(that.index, config.end);
             });
@@ -183,7 +196,7 @@
     };
 
     var panV = {
-        v : '0.0.1',
+        v : 'panli.com 组件库 0.0.1',
         index:index,
         author:'zan',
         /*主要方法*/
@@ -220,6 +233,19 @@
             ga('create', 'UA-436090-2', 'auto');ga('require', 'displayfeatures');
             ga('send', 'pageview');
         },
+        /* rem 字体转换 */
+        remFontSize:function(){
+            var fontsize = function () {
+                var W = document.body.getBoundingClientRect().width, defaultW = 720, defaultSize = 40;
+                W = W > defaultW ? defaultW : W < 320 ? 320 : W;
+                window.W = W; document.documentElement.style.fontSize = (W / defaultW * defaultSize).toFixed(2) + 'px';
+            };
+            var fontset = setTimeout(fontsize, 300);
+            window.addEventListener('resize', function () { clearTimeout(fontset); fontset = setTimeout(fontsize, 300) });
+            window.addEventListener("DOMContentLoaded", fontsize);
+            setTimeout(fontsize, 300);
+
+        }
     }
 
 
@@ -228,8 +254,11 @@
         return pan;
     }) : window.pan = panV;
 
+    //panV.googleCount();
+    if(!is_pc){
+        panV.remFontSize();
+        console.log('NOpc')
+    }
+
 
 }(window);
-/**
- * Created by Administrator on 2015/9/11.
- */

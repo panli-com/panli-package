@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Register PanLi.com</title>
+    <meta content="" name="keywords" />
+    <meta content="" name="description" >
+    <!-- 公共组件库 panli.js -->
+    <script src="./dist/common/js/panli.min.js"></script>
+    <link rel="stylesheet" href="./dist/login/css/login.min.css"/>
+</head>
+<body>
+<div id="main" class="main">
+    <header class="head">
+        <div class="head_con">
+            <span class="back" onclick="back(); return false;"></span>
+            注册
+        </div>
+    </header>
+    <form name="RegisterForm" method="post" action="Register.aspx" id="RegisterForm">
+        <div>
+            <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTcxMDYwMzYwNGRk0z94Ko9EQ5hdkn9DxYyRktrQf+w=">
+        </div>
+
+        <div>
+
+            <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="B1089D08">
+        </div>
+        <div class="formLogin">
+            <div class="input">
+                <span class="login_icon email"></span>
+                <input type="text" placeholder="填写注册邮箱" value="" name="email">
+            </div>
+            <div class="input">
+                <span class="login_icon user"></span>
+                <input type="text" placeholder="填写用户名" value="" name="username">
+            </div>
+            <div class="input">
+                <span class="login_icon password"></span>
+                <input type="password" placeholder="6-20位，建议数字、字母、符号组合" value="" name="password">
+                <span class="login_icon lookCode"></span>
+            </div>
+            <div class="wrong" id="errorInfo" style="display: none;">
+            </div>
+            <div class="submit sub_register">
+                <a onclick="RegisterSubmit()">注册</a>
+            </div>
+            <div class="forget text_left">我已阅读并同意<a href="#" class="forgeta">《Panli注册协议》</a></div>
+        </div>
+    </form>
+    <script>
+       /* var password = $("input[type=password]"),
+                lookPassword = $(".lookPassword"),
+                lookcode = $(".lookCode");
+        lookcode.on({
+            'touchstart': function () {
+                password.attr('type', 'text');
+            },
+            'touchend': function () {
+                password.attr('type', 'password');
+            }
+        })
+        function RegisterSubmit() {
+            $("form").submit();
+        }*/
+    </script>
+    <footer class="foot">
+        <p><a herf="http://www.panli.com">电脑版</a><a href="">下载APP</a></p>
+        <p>©2014 m.Panli.com  沪ICP备13043455号-1</p>
+    </footer>
+
+</div>
+</body>
+
+<!--<script src="./dist/login/js/main.js"></script>-->
+</html>

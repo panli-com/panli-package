@@ -1,0 +1,140 @@
+@charset "UTF-8";
+/* 注册 */
+body {
+  background-color: #efefef; }
+
+.main {
+  min-width: 320px;
+  margin: auto;
+  max-width: 720px;
+  width: 18rem; }
+
+.head {
+  height: 2.5rem;
+  background-color: #eaeaea;
+  color: #666;
+  font-size: 0.6rem;
+  text-align: center;
+  line-height: 2.5rem;
+  position: relative; }
+
+.head_con {
+  height: 2.5rem;
+  font-size: 0.6rem;
+  line-height: 2.5rem; }
+
+.back {
+  position: absolute;
+  background-size: contain;
+  width: 1.005rem;
+  height: 1.005rem;
+  left: 0.75rem;
+  top: 0.75rem; }
+
+.register {
+  background-color: #fff;
+  color: #666;
+  border: solid 0.06rem #ccc;
+  padding: 0.375rem;
+  border-radius: 0.2rem;
+  line-height: 0.6rem;
+  position: absolute;
+  right: .75rem;
+  top: 0.5rem; }
+
+.formLogin {
+  padding: 1rem; }
+
+.input {
+  border: solid 0.06rem #ccc;
+  border-radius: 0.1rem;
+  height: 2rem;
+  background-color: #fff;
+  position: relative;
+  display: -webkit-box;
+  margin-bottom: 0.5rem; }
+
+.input span.login_icon {
+  display: block;
+  /*  background:url(/FrontEnd/images20090801/H5/login.png) no-repeat;*/
+  background-size: 1.625rem 6.5rem;
+  width: 1.9rem;
+  height: 1.9rem; }
+
+.input span.email {
+  background-position: 0.1rem -4.64rem; }
+
+.input span.user {
+  background-position: 0.1rem 0.2rem; }
+
+.input span.password {
+  background-position: 0.1rem -1.48rem; }
+
+.input span.lookCode {
+  background-position: 0.1rem -3.1rem; }
+
+.input input {
+  -webkit-box-flex: 1;
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.7rem;
+  height: 0.8rem;
+  background-color: transparent;
+  border: none; }
+
+.submit {
+  padding-top: 0.5rem; }
+
+.submit a {
+  display: block;
+  height: 2.5rem;
+  text-align: center;
+  line-height: 2.4rem;
+  background-color: #cc3300;
+  border-radius: 0.15rem;
+  position: relative;
+  color: #ffffff;
+  font-size: 0.9rem; }
+
+.submit a:after {
+  position: absolute;
+  height: 2.4rem;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  background-color: #ff6600;
+  content: '登录';
+  display: block;
+  border-radius: 0.15rem; }
+
+.submit.sub_register a:after {
+  content: '注册'; }
+
+.forget {
+  text-align: right;
+  margin-top: 0.5rem;
+  font-size: 0.6rem;
+  color: #999; }
+
+.text_left {
+  text-align: left; }
+
+.forgeta {
+  color: #ff6600;
+  font-size: 0.6rem; }
+
+.foot {
+  border-top: #eaeaea 0.06rem solid;
+  font-size: 0.6rem;
+  color: #999999;
+  text-align: center;
+  padding: 1rem 0;
+  line-height: 1.2rem; }
+
+.foot a {
+  color: #999;
+  padding: 0 0.9rem; }
+
+/* 登录 */
+.com {
+  display: block; }
